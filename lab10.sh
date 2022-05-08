@@ -132,7 +132,7 @@ function getFibonacciTiming(){
     EndDateMinutes=`date --date="$EndDate" '+%M'`
     DateDurationMinutes=`echo "scale = 10; $EndDateMinutes-$StartDateMinutes" | bc`
     #Get START AND END TIME DURATIONS
-    DateDurationSecsAndNano=`echo "scale = 10; $EndDateTiming-$StartDateTiming" | bc | awk '{printf "%f", $0}'`
+    DateDurationSecsAndNano=`echo "scale = 10; $EndDateTiming-$StartDateTiming" | bc | awk '{printf "0%f", $0}'`
     echo "" | tee -a $function_FileName
 
     #IF any is 0 it doesnt show so make them string representations
