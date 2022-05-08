@@ -32,14 +32,11 @@ else
 	touch $USER_FileName
 fi
 
-
 echo "Enter the type of fib_nonacci function('R' or 'r' for recursive and 'N' or 'n' for non-recursive):"
 read USER_Letter
 
-#Create functions for recursive/non-recursive
-#recursive function
+#Create Recursive function
 fib_r(){
-	#get commandline input
 	userNum=$1
 	if [ "$userNum" -lt 2 ] ; then
 		echo "$userNum"
@@ -54,11 +51,9 @@ fib_r(){
 	fi
 }
 
-#non-recursive function
+#Create Non-Recursive function
 function fib_n(){ 
-	#get commandline input
     userNum=$1
-
     result=0
 	num2=1
 	count=2
@@ -135,39 +130,21 @@ function getFibonacciTiming(){
     DateDurationSecsAndNano=`echo "scale = 10; $EndDateTiming-$StartDateTiming" | bc | awk '{printf "0%f", $0}'`
     echo "" | tee -a $function_FileName
 
-    #IF any is 0 it doesnt show so make them string representations
-    # if [[ $DateDurationMinutes -eq 0 ]]
-    # then 
-    #     DateDurationMinutes="0"
-    # fi
-
     #PUT ALL TIME VARIATIONS TOGETHER
     TotalTime="$DateDurationMinutes:$DateDurationSecsAndNano"
     echo "Total Time for the run = $TotalTime" | tee -a $function_FileName
-	# echo "0.1 + 0.1" | bc | awk '{printf "%f", $0}'
-	#; if(x<1) print 0; x" | bc 
-	# echo "x=0.1 + 0.1; if(x<1) print 0; x" | bc
-	# | bc | sed 's/^\./0./'
     echo ""
     echo "Report has finished"
+    
 }
-while :
-do
+while : ; do  #Recursive  #Non-Recursive  #Other  #Report that the report has begun
+    echo "Report has started"
     case $USER_Letter in
-	    #Recursive	
-		R|r) 
-            #Report that the report has begun
-            echo "Report has started"
-            getFibonacciTiming "fibonacci.out" fib_r $USER_Num "RECURSIVE"
+		R|r) getFibonacciTiming "fibonacci.out" fib_r $USER_Num "RECURSIVE"
   			break;;
-		#Non-Recursive
-    	N|n) 
-            echo "Report has started"
-		    getFibonacciTiming "fibonacci.out" fib_n $USER_Num "NON-RECURSIVE"
+    	N|n) getFibonacciTiming "fibonacci.out" fib_n $USER_Num "NON-RECURSIVE"
 		    break;;
-		#Other
-    	*)  
-            echo "Non an option. Enter either \'R\' or \'r\' to use recursive and \'N\' or \'n\' to use non-recursive method: "
+    	*)  echo "Non an option. Enter either \'R\' or \'r\' to use recursive and \'N\' or \'n\' to use non-recursive method: "
 	    	read USER_Letter;;  
     esac
 done 
